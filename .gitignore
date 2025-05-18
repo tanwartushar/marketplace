@@ -1,0 +1,23 @@
+# Node.js
+node_modules/
+.env
+npm-debug.log
+.DS_Store
+
+# logs
+logs/
+*.log
+
+# OS-specific
+Thumbs.db
+
+# editor folders
+.vscode/
+.idea/
+
+# DB dumps or backups
+# *.sql
+*.dump
+
+# others
+setup.sh
