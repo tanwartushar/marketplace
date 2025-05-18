@@ -1,16 +1,8 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Pool } = require('pg');
-
+const pool = require('../db');
 const router = express.Router();
-const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT
-});
 
 // signup route
 router.post('/signup', async (req, res) => {
