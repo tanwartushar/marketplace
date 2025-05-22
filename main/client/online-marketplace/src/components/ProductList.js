@@ -7,6 +7,8 @@ const API = process.env.REACT_APP_API_BASE_URL;
 
 function ProductList() {
     const [products, setProducts] = useState([]);
+    
+    const userId = 1; //temp
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -24,7 +26,7 @@ function ProductList() {
         <div className='product-list'>
         {/* <div> <h1>Our Products</h1><ProductList /></div>  */}
             {products.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} userId={userId}/>
             ))}
         </div>
     );
