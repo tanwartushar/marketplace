@@ -5,6 +5,7 @@ const { Pool } = require('pg');
 
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
+const cartRoutes = require('./routes/cart');
 
 const app = express();
 const PORT = process.env.PORT;
@@ -38,6 +39,7 @@ pool.connect()
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('./api/cart', cartRoutes);
 
 app.get('/', (req, res) => {
     console.log('GET / route hit');
