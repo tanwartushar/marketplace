@@ -30,17 +30,19 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ProductList from './components/ProductList';
+import Cart from './components/Cart';
 
 function App() {
   return (
     <Router>
       <nav>
-        <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link> | <Link to="/products">Our Products</Link>
+        <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link> | <Link to="/products">Our Products</Link> | <Link to="/cart">Cart</Link>
       </nav>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/products" element={<ProductList />} />
+        <Route path="/cart" element={<Cart userId={1} />} />
       </Routes>
     </Router>
   );

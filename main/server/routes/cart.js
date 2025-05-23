@@ -48,7 +48,48 @@ router.post('/add', async (req, res) => {
 
     } catch (error) {
         console.error('Error in adding to the cart: ', error);
-        res.status(500).json({error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+router.get('/', async (req, res) => {
+    const userId = req.query.user_id;
+
+    if (!userId) {
+        return res.status(400).json({ error: 'Missing user id' });
+    }
+
+    try {
+        const cartResult = await pool.query(
+            'SELECT id from carts where user_id = $1', [userId]
+        );
+
+        if (cartResult.rows.length === 0) {
+            return res.json({ cart: [] }); // empty cart
+        }
+
+        const cartId = cartResult.rows[0].id;
+
+        const cartItemsResult = await pool.query(
+            `SELECT 
+                ci.id AS cart_item_id, 
+                ci.quantity, 
+                p.id AS product_id, 
+                p.name, 
+                p.price,
+                p.description,
+                p.image_url
+            FROM cart_items ci
+            JOIN products p ON ci.product_id = p.id
+            WHERE ci.cart_id = $1`, [cartId]
+        );
+
+        res.json({ cart: cartItemsResult.rows });
+
+    } catch (error) {
+        console.error("Error fetching cart items");
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
