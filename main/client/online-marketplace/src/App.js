@@ -31,20 +31,23 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
+import { UserProvider } from './UserContext';
 
 function App() {
   return (
-    <Router>
-      <nav>
-        <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link> | <Link to="/products">Our Products</Link> | <Link to="/cart">Cart</Link>
-      </nav>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/cart" element={<Cart userId={1} />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <nav>
+          <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link> | <Link to="/products">Our Products</Link> | <Link to="/cart">Cart</Link>
+        </nav>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/products" element={<ProductList />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 }
 
