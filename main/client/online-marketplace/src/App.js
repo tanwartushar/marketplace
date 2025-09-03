@@ -32,12 +32,14 @@ import Signup from './components/Signup';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 import { UserContext } from './UserContext';
+import Home from './components/Home';
 
 function App() {
   const { user, logout } = useContext(UserContext)
   return (
       <Router>
         <nav>
+          <Link to="/">Home</Link> | {}
           <Link to="/products">Our Products</Link> | {}
           <Link to="/cart">Cart</Link> | {}
 
@@ -57,6 +59,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </Router>
   );

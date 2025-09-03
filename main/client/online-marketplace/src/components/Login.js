@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const API = process.env.REACT_APP_API_BASE_URL;
 
@@ -8,9 +9,16 @@ function Login() {
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
-
     const { login } = useContext(UserContext);
+    const navigate = useNavigate();
+    const location = useLocation(); // for signup msg
     
+    useEffect(() => {
+        if (location.state?.signupMessage) {
+          setMessage(location.state.signupMessage);
+        }
+      }, [location.state]);
+
     const handleLogin = async (e) => {
         e.preventDefault();
 
@@ -26,6 +34,8 @@ function Login() {
         console.log("Login successful.")
         setMessage('Login successful!');
         
+        //redirect to home page
+        navigate("/");
         } catch (err) {
             setMessage(err.response?.data?.message || 'Login failed.');
         }

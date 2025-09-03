@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import '../styles/ProductCard.css';
+import { UserContext } from '../UserContext';
 
 const API = process.env.REACT_APP_API_BASE_URL;
 
 function ProductCard({ product, userId }) {
+    const { user } = useContext(UserContext)
     const handleAddToCart = async () => {
         try {
             const res = await axios.post(`${API}/api/cart/add`, {
-                user_id: userId,
+                user_id: user.id,
                 product_id: product.id,
                 quantity: 1,
                 });

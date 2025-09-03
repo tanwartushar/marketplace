@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const API = process.env.REACT_APP_API_BASE_URL;
 
@@ -8,6 +9,8 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
@@ -18,8 +21,11 @@ function Signup() {
             });
 
             localStorage.setItem('token', res.data.token);
-            console.log("Signup successful.")
+            console.log("Signup successful.");
             setMessage('Signup successful!');
+
+            // redirect to login page
+            navigate("/login", {state: {signupMessage: "Signup successful. Please login."}});
         } catch (err) {
             setMessage(err.response?.data?.message || 'Signup failed.');
         }
