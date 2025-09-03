@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { UserContext } from '../UserContext';
 
 const API = process.env.REACT_APP_API_BASE_URL;
 
@@ -7,6 +8,8 @@ function Login() {
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+
+    const { login } = useContext(UserContext);
     
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -16,6 +19,8 @@ function Login() {
             identifier,
             password
             });
+
+            login(res.data.token);
 
         localStorage.setItem('token', res.data.token);
         console.log("Login successful.")

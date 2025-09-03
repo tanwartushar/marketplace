@@ -52,6 +52,37 @@ router.post('/add', async (req, res) => {
     }
 });
 
+router.delete('/item/:id', async (req, res) => {
+    const cartItemId = req.params.id;
+    try {
+        await pool.query('DELETE FROM cart_items WHERE id = $1', [cartItemId]);
+        res.json({ message: 'Item removed from cart' });
+    } catch (error) {
+        console.error("Error removing cart item: ", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.put('/item/:id', async (req, res) => {
+    const cartItemId = req.params.id;
+    const { quantity } = req.body;
+   
+    if (quantity < 1) {
+        return res.status(400).json({ error: 'Quantity must be at least 1' });
+    }
+
+    try {
+        await pool.query(
+            'UPDATE cart_items SET quantity = $1 WHERE id = $2',
+            [quantity, cartItemId]
+        );
+        res.json({ message: 'Quantity updated successfully' });
+    } catch (error) {
+        console.error("Error updating cart item:", error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+
+});
 
 router.get('/', async (req, res) => {
     const userId = req.query.user_id;
@@ -92,5 +123,6 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
 
 module.exports = router;

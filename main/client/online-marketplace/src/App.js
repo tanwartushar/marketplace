@@ -25,20 +25,32 @@
 // export default App;
 
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
-import { UserProvider } from './UserContext';
+import { UserContext } from './UserContext';
 
 function App() {
+  const { user, logout } = useContext(UserContext)
   return (
-    <UserProvider>
       <Router>
         <nav>
-          <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link> | <Link to="/products">Our Products</Link> | <Link to="/cart">Cart</Link>
+          <Link to="/products">Our Products</Link> | {}
+          <Link to="/cart">Cart</Link> | {}
+
+          {!user ? (
+            <>
+              <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
+            </>
+          ) : (
+            <>
+              <span>Welcome, {user.email}</span> | {/*  use as named in UserContext.js */}     
+              <button onClick={logout}>Logout</button>
+            </>
+          )}
         </nav>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -47,7 +59,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
-    </UserProvider>
   );
 }
 

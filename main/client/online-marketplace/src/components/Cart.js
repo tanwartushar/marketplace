@@ -34,7 +34,22 @@ function Cart() {
                 <p>Your cart is empty.</p>
             ) : (
                 cartItems.map((item) => (
-                    <CartItem key={item.cart_item_id} item={item} />
+                    <CartItem 
+                        key={item.cart_item_id} 
+                        item={item} 
+                        onUpdate={(id, newQuantity) => {
+                            setCartItems(prev => 
+                                prev.map(item =>
+                                    item.cart_item_id === id 
+                                    ? { ...item, quantity: newQuantity}
+                                    : item)
+                                );    
+                        }}
+                        onRemove={(id) => {
+                            setCartItems(prev => prev.filter(item =>
+                                item.cart_item_id !== id));
+                        }}
+                    />
                 ))
             )}
             

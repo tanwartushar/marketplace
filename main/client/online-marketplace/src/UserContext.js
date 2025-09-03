@@ -22,6 +22,7 @@ export const UserProvider = ({ children }) => {
     const login = (token) => {
         localStorage.setItem('token', token);   // save token for 'persistence'
         const decoded = jwtDecode(token);
+        console.log("Decoded JWT:", decoded);
         setUser({ id: decoded.userId, email: decoded.email, token})
     };
     
