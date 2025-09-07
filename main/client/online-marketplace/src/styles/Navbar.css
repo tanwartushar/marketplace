@@ -1,0 +1,48 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: #1e293b;
+    color: white;
+}
+  
+.navbar-links {
+    display: flex;        
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    margin-left: 1rem;
+    text-decoration: none;
+  }
+  
+.logout-button {
+    margin-left: 1rem;
+    background: #ef4444;
+    border: none;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left:1rem;
+    line-height: 1.2;
+}
+  
+
+.welcome-text{
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.user-email{
+    font-size: 0.8rem;
+    color: #d1d5db;;
+}

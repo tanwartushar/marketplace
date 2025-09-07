@@ -1,17 +1,15 @@
-import React, { useContext } from "react";
-import { UserContext } from "../UserContext";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Home.css';
 
 function Home() {
-  const { user } = useContext(UserContext);
-
   return (
-    <div>
-      <h1>Welcome to Online Marketplace</h1>
-      {user ? (
-        <p>Hello, {user.email}! Browse our products and add them to your cart.</p>
-      ) : (
-        <p>Please log in or sign up to start shopping.</p>
-      )}
+    <div className="home">
+      <header className="home-main">
+        <h1>Welcome to OnlineMarketplace</h1>
+        <p>Your one-stop shop for everything you need.</p>
+        <Link to="/products" className="shop-now-button">Shop Now</Link>
+      </header>
     </div>
   );
 }

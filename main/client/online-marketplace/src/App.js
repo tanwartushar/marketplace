@@ -31,29 +31,15 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
-import { UserContext } from './UserContext';
 import Home from './components/Home';
+import Navbar from './components/Navbar';
+import { UserContext } from './UserContext';
 
 function App() {
   const { user, logout } = useContext(UserContext)
   return (
       <Router>
-        <nav>
-          <Link to="/">Home</Link> | {}
-          <Link to="/products">Our Products</Link> | {}
-          <Link to="/cart">Cart</Link> | {}
-
-          {!user ? (
-            <>
-              <Link to="/login">Login</Link> | <Link to="/signup">Signup</Link>
-            </>
-          ) : (
-            <>
-              <span>Welcome, {user.email}</span> | {/*  use as named in UserContext.js */}     
-              <button onClick={logout}>Logout</button>
-            </>
-          )}
-        </nav>
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
