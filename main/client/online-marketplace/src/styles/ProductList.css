@@ -4,3 +4,30 @@
     gap: 20px;
     padding: 20px;
 }
+.category-bar {
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background: #f3f4f6;
+    border-radius: 6px;
+}
+
+.category-bar button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    background: #e5e7eb;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.category-bar button:hover {
+    background: #d1d5db;
+}
+
+.category-bar button.active {
+    background: #1e293b;
+    color: white;
+}
+  

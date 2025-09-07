@@ -4,9 +4,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const result = await pool.query(
-            'SELECT * FROM products'
-        );
+        const result = await pool.query('SELECT * FROM products');
         res.json(result.rows);
 
     } catch (error) {
@@ -15,5 +13,17 @@ router.get('/', async (req, res) => {
     }
     // res.send('Products route hit');
 });
+
+router.get('/categories', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT DISTINCT category FROM products');
+      const categories = result.rows.map(row => row.category);
+      res.json(categories);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Error fetching categories' });
+    }
+  });
+  
 
 module.exports = router;
